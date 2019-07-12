@@ -13224,7 +13224,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[191]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -13553,7 +13553,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[180]:</div>
+<div class="prompt input_prompt">In&nbsp;[198]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="k">import</span> <span class="n">preprocess_input</span><span class="p">,</span> <span class="n">decode_predictions</span>
@@ -13580,7 +13580,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[187]:</div>
+<div class="prompt input_prompt">In&nbsp;[199]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### returns &quot;True&quot; if a dog is detected in the image stored at img_path</span>
@@ -13613,7 +13613,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[201]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Test the performance of the dog_detector function</span>
@@ -13626,25 +13626,6 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Percentages of Dogs in Human files:1%
-Percentages of Dogs in Dog files: 100%
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -14447,12 +14428,7 @@ Epoch 00020: val_loss did not improve from 7.39364
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong></p>
-<ol>
-<li>I used the GlobalAveragePooling layer as an input due to the complexity of the ResNet50 Architecture. </li>
-<li>I added a dense fully connect layer followed by a dropout layer in order to prevent overfitting. </li>
-<li>The final layers contains the number of breeds I am trying to predict.</li>
-</ol>
-<p>I did not want to add more layers to this CNN due to it's complex architecture. I can't believe the 40% increase in accuracy followed by the decreased taining time.</p>
+<p>I believe this architecture will have drastically better performace as it will utilize the complexity of the ResNet50 alogithm which is more suitable for this problem. Since The dataset is relatively small I believe adding a GlobaAverage Pooling layer as the input will prevent overfitting. Since all the 3-D features are now reduced into a vector I decided to use a dense layer in the next step followed by a Dropout layer to prevent overfitting. The final Dense layer has 133 nodes representing all the breed types, followed with a softmax activation function in order to maintain the overall probability between all the breed equal to 1.</p>
 
 </div>
 </div>
@@ -14812,7 +14788,7 @@ Epoch 00020: val_loss improved from 0.49274 to 0.48543, saving model to saved_mo
     <span class="k">elif</span> <span class="n">human</span><span class="p">:</span>
         <span class="k">return</span><span class="p">(</span><span class="s2">&quot;Hello Human! </span><span class="se">\n</span><span class="s2"> You look like a </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dog_breed</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span><span class="p">(</span><span class="s2">&quot;Hmm....You will find to give me a better picture&quot;</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="s2">&quot;Hmm....You will need to give me a better picture&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
