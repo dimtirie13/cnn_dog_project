@@ -13463,7 +13463,7 @@ it depends on what qualifies as "clear view" of a face. How clear does it have t
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[207]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="k">import</span> <span class="n">ResNet50</span>
@@ -13473,26 +13473,6 @@ it depends on what qualifies as "clear view" of a face. How clear does it have t
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>WARNING:tensorflow:From C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
-Instructions for updating:
-Colocations handled automatically by placer.
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13580,7 +13560,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[199]:</div>
+<div class="prompt input_prompt">In&nbsp;[209]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### returns &quot;True&quot; if a dog is detected in the image stored at img_path</span>
@@ -13613,7 +13593,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[201]:</div>
+<div class="prompt input_prompt">In&nbsp;[211]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Test the performance of the dog_detector function</span>
@@ -13626,6 +13606,25 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Percentages of Dogs in Human files:1%
+Percentages of Dogs in Dog files: 100%
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -14389,22 +14388,16 @@ Epoch 00020: val_loss did not improve from 7.39364
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### (IMPLEMENTATION) Obtain Bottleneck Features</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="(IMPLEMENTATION)-Obtain-Bottleneck-Features">(IMPLEMENTATION) Obtain Bottleneck Features<a class="anchor-link" href="#(IMPLEMENTATION)-Obtain-Bottleneck-Features">&#182;</a></h3>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[202]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bottleneck_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;bottleneck_features/DogResNet50Data.npz&#39;</span><span class="p">)</span>
@@ -14428,14 +14421,20 @@ Epoch 00020: val_loss did not improve from 7.39364
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong></p>
-<p>I believe this architecture will have drastically better performace as it will utilize the complexity of the ResNet50 alogithm which is more suitable for this problem. Since The dataset is relatively small I believe adding a GlobaAverage Pooling layer as the input will prevent overfitting. Since all the 3-D features are now reduced into a vector I decided to use a dense layer in the next step followed by a Dropout layer to prevent overfitting. The final Dense layer has 133 nodes representing all the breed types, followed with a softmax activation function in order to maintain the overall probability between all the breed equal to 1.</p>
+<p>I believe this architecture will have drastically better performace as it will utilize the complexity of the ResNet50 alogithm which is more suitable for this problem.</p>
+<ul>
+<li>Layer 1 - Since The dataset is relatively small and the ResNet50 architecture is quite complex I  added a GlobaAverage Pooling layer as the input to prevent   -overfitting. </li>
+<li>Layer 2 - Now all 3-D features are reduced into a vector, so I decided to use a fully connected layer due it's linear operation</li>
+<li>Lyer 3 - Dropout layer to prevent overfitting. </li>
+<li>Layer 4 - The final Dense layer has 133 nodes representing all the breed types, followed with a softmax activation function in order to maintain the overall probability between all the breed equal to 1.</li>
+</ul>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[150]:</div>
+<div class="prompt input_prompt">In&nbsp;[217]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ResNet50_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
@@ -14464,13 +14463,13 @@ Epoch 00020: val_loss did not improve from 7.39364
 <pre>_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-global_average_pooling2d_17  (None, 2048)              0         
+global_average_pooling2d_19  (None, 2048)              0         
 _________________________________________________________________
-dense_29 (Dense)             (None, 500)               1024500   
+dense_33 (Dense)             (None, 500)               1024500   
 _________________________________________________________________
-dropout_14 (Dropout)         (None, 500)               0         
+dropout_16 (Dropout)         (None, 500)               0         
 _________________________________________________________________
-dense_30 (Dense)             (None, 133)               66633     
+dense_34 (Dense)             (None, 133)               66633     
 =================================================================
 Total params: 1,091,133
 Trainable params: 1,091,133
@@ -14763,7 +14762,7 @@ Epoch 00020: val_loss improved from 0.49274 to 0.48543, saving model to saved_mo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[169]:</div>
+<div class="prompt input_prompt">In&nbsp;[214]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">final_predictor</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
@@ -14784,9 +14783,9 @@ Epoch 00020: val_loss improved from 0.49274 to 0.48543, saving model to saved_mo
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     
     <span class="k">if</span> <span class="n">dog</span><span class="p">:</span>
-        <span class="k">return</span><span class="p">(</span><span class="s2">&quot;The dog breed in the image is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dog_breed</span><span class="p">))</span>
+        <span class="k">return</span><span class="p">(</span><span class="s2">&quot;The dog breed in the image is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">breed</span><span class="p">))</span>
     <span class="k">elif</span> <span class="n">human</span><span class="p">:</span>
-        <span class="k">return</span><span class="p">(</span><span class="s2">&quot;Hello Human! </span><span class="se">\n</span><span class="s2"> You look like a </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dog_breed</span><span class="p">))</span>
+        <span class="k">return</span><span class="p">(</span><span class="s2">&quot;Hello Human! </span><span class="se">\n</span><span class="s2"> You look like a </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">breed</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span><span class="p">(</span><span class="s2">&quot;Hmm....You will need to give me a better picture&quot;</span><span class="p">)</span>
 </pre></div>
@@ -14811,13 +14810,75 @@ Epoch 00020: val_loss improved from 0.49274 to 0.48543, saving model to saved_mo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[219]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ResNet50_predict_breed</span><span class="p">(</span><span class="s1">&#39;test_images/me2.PNG&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\ProgramData\Anaconda3\lib\site-packages\keras_applications\resnet50.py:265: UserWarning: The output shape of `ResNet50(include_top=False)` has been changed since Keras 2.2.0.
+  warnings.warn(&#39;The output shape of `ResNet50(include_top=False)` &#39;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-219-ae6cafd13497&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>ResNet50_predict_breed<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#39;test_images/me2.PNG&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-189-a3522a48a789&gt;</span> in <span class="ansi-cyan-fg">ResNet50_predict_breed</span><span class="ansi-blue-intense-fg ansi-bold">(img_path)</span>
+<span class="ansi-green-fg">      3</span> <span class="ansi-green-intense-fg ansi-bold">def</span> ResNet50_predict_breed<span class="ansi-yellow-intense-fg ansi-bold">(</span>img_path<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">      4</span>     bottleneck_feature <span class="ansi-yellow-intense-fg ansi-bold">=</span> extract_Resnet50<span class="ansi-yellow-intense-fg ansi-bold">(</span>path_to_tensor<span class="ansi-yellow-intense-fg ansi-bold">(</span>img_path<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 5</span><span class="ansi-yellow-intense-fg ansi-bold">     </span>predicted_vector <span class="ansi-yellow-intense-fg ansi-bold">=</span> ResNet50_model<span class="ansi-yellow-intense-fg ansi-bold">.</span>predict<span class="ansi-yellow-intense-fg ansi-bold">(</span>bottleneck_feature<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">      6</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> dog_names<span class="ansi-yellow-intense-fg ansi-bold">[</span>np<span class="ansi-yellow-intense-fg ansi-bold">.</span>argmax<span class="ansi-yellow-intense-fg ansi-bold">(</span>predicted_vector<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+
+<span class="ansi-green-intense-fg ansi-bold">C:\ProgramData\Anaconda3\lib\site-packages\keras\engine\training.py</span> in <span class="ansi-cyan-fg">predict</span><span class="ansi-blue-intense-fg ansi-bold">(self, x, batch_size, verbose, steps)</span>
+<span class="ansi-green-fg">   1147</span>                              &#39;argument.&#39;)
+<span class="ansi-green-fg">   1148</span>         <span class="ansi-red-intense-fg ansi-bold"># Validate user data.</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 1149</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>x<span class="ansi-yellow-intense-fg ansi-bold">,</span> _<span class="ansi-yellow-intense-fg ansi-bold">,</span> _ <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_standardize_user_data<span class="ansi-yellow-intense-fg ansi-bold">(</span>x<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   1150</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>stateful<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">   1151</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> x<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>shape<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span> <span class="ansi-yellow-intense-fg ansi-bold">&gt;</span> batch_size <span class="ansi-green-intense-fg ansi-bold">and</span> x<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>shape<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span> <span class="ansi-yellow-intense-fg ansi-bold">%</span> batch_size <span class="ansi-yellow-intense-fg ansi-bold">!=</span> <span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">C:\ProgramData\Anaconda3\lib\site-packages\keras\engine\training.py</span> in <span class="ansi-cyan-fg">_standardize_user_data</span><span class="ansi-blue-intense-fg ansi-bold">(self, x, y, sample_weight, class_weight, check_array_lengths, batch_size)</span>
+<span class="ansi-green-fg">    749</span>             feed_input_shapes<span class="ansi-yellow-intense-fg ansi-bold">,</span>
+<span class="ansi-green-fg">    750</span>             check_batch_axis<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">False</span><span class="ansi-yellow-intense-fg ansi-bold">,</span>  <span class="ansi-red-intense-fg ansi-bold"># Don&#39;t enforce the batch size.</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 751</span><span class="ansi-yellow-intense-fg ansi-bold">             exception_prefix=&#39;input&#39;)
+</span><span class="ansi-green-fg">    752</span> 
+<span class="ansi-green-fg">    753</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> y <span class="ansi-green-intense-fg ansi-bold">is</span> <span class="ansi-green-intense-fg ansi-bold">not</span> <span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">C:\ProgramData\Anaconda3\lib\site-packages\keras\engine\training_utils.py</span> in <span class="ansi-cyan-fg">standardize_input_data</span><span class="ansi-blue-intense-fg ansi-bold">(data, names, shapes, check_batch_axis, exception_prefix)</span>
+<span class="ansi-green-fg">    136</span>                             <span class="ansi-blue-intense-fg ansi-bold">&#39;: expected &#39;</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span> names<span class="ansi-yellow-intense-fg ansi-bold">[</span>i<span class="ansi-yellow-intense-fg ansi-bold">]</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span> <span class="ansi-blue-intense-fg ansi-bold">&#39; to have shape &#39;</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span>
+<span class="ansi-green-fg">    137</span>                             str<span class="ansi-yellow-intense-fg ansi-bold">(</span>shape<span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span> <span class="ansi-blue-intense-fg ansi-bold">&#39; but got array with shape &#39;</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 138</span><span class="ansi-yellow-intense-fg ansi-bold">                             str(data_shape))
+</span><span class="ansi-green-fg">    139</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> data
+<span class="ansi-green-fg">    140</span> 
+
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>: Error when checking input: expected global_average_pooling2d_19_input to have shape (1, 1, 2048) but got array with shape (7, 7, 2048)</pre>
+</div>
+</div>
+
 </div>
 </div>
 
